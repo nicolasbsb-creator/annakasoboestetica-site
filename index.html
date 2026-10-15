@@ -630,98 +630,74 @@ var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portf�
 
 <script>
 /* ============================================================
-   SOM AMBIENTE — trilha original + riacho, gerados no navegador (sem
-   arquivos de áudio e sem direitos autorais). Navegadores só
-   permitem som após uma interação: começa no 1º clique/toque.
+   SOM AMBIENTE — J. S. Bach, Prelúdio em Dó maior (BWV 846, 1722,
+   domínio público), em piano suave sintetizado no navegador.
+   Sem arquivos de áudio. Navegadores só permitem som após uma
+   interação: começa no 1º clique/toque.
    ============================================================ */
 (function(){
   var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
   var btn=document.getElementById('sound-btn'), lbl=document.getElementById('sound-label');
-  var KEY='ak_sound', ctx=null, master=null, playing=false, timers=[];
+  var KEY='ak_sound', ctx=null, master=null, verb=null, dry=null, playing=false, timer=null;
   function pref(){try{return localStorage.getItem(KEY)}catch(e){return null}}
   function setPref(v){try{localStorage.setItem(KEY,v)}catch(e){}}
-  var VOL=0.07;
-  // Acordes (Hz): Fmaj7, Dm9, Bbmaj7, C6/9 — progressão calma
-  var CHORDS=[[174.61,220,261.63,329.63],[146.83,220,261.63,329.63,349.23],[116.54,233.08,293.66,349.23],[130.81,196,293.66,329.63,440]];
-  var BELLS=[523.25,587.33,659.25,783.99,880,1046.5];
-  function impulse(){var len=ctx.sampleRate*3.5,b=ctx.createBuffer(2,len,ctx.sampleRate);
-    for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6);}return b;}
-  var verb,dry,lp;
+  var VOL=0.16, STEP=0.30; // segundos por semicolcheia (andamento lento)
+  // Compassos 1–19 (5 notas cada, em MIDI); padrão de Bach: 1 2 3 4 5 3 4 5, duas vezes
+  var BARS=[[60,64,67,72,76],[60,62,69,74,77],[59,62,67,74,77],[60,64,67,72,76],
+    [60,64,69,76,81],[60,62,66,69,74],[59,62,67,74,79],[59,60,64,67,72],
+    [57,60,64,67,72],[50,57,62,66,72],[55,59,62,67,71],[55,58,64,67,73],
+    [53,57,62,69,74],[53,56,62,65,71],[52,55,60,67,72],[52,53,57,60,65],
+    [50,53,57,60,65],[43,50,55,59,65],[48,52,55,60,64]];
+  var PAT=[0,1,2,3,4,2,3,4];
+  function hz(m){return 440*Math.pow(2,(m-69)/12);}
+  function impulse(){var len=ctx.sampleRate*3,b=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}return b;}
   function build(){
-    ctx=new AC(); master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
-    lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=1400; lp.Q.value=.3;
+    ctx=new AC(); master=ctx.createGain(); master.gain.value=0;
+    var lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=3200;
+    master.connect(lp); lp.connect(ctx.destination);
     verb=ctx.createConvolver(); verb.buffer=impulse();
-    var wet=ctx.createGain(); wet.gain.value=.55; dry=ctx.createGain(); dry.gain.value=.6;
-    lp.connect(dry); lp.connect(verb); verb.connect(wet); dry.connect(master); wet.connect(master);
-    buildWater();
+    var wet=ctx.createGain(); wet.gain.value=.35; dry=ctx.createGain(); dry.gain.value=.8;
+    dry.connect(master); verb.connect(wet); wet.connect(master);
   }
-  /* Riacho: ruído "marrom" filtrado, com ondulação lenta + gotas esparsas */
-  var waterGain;
-  function buildWater(){
-    var len=ctx.sampleRate*6, buf=ctx.createBuffer(2,len,ctx.sampleRate);
-    for(var c=0;c<2;c++){var d=buf.getChannelData(c),last=0;
-      for(var i=0;i<len;i++){var w=Math.random()*2-1; last=(last+0.02*w)/1.02; d[i]=last*3.2;}
-      // suaviza a emenda do loop
-      for(var j=0;j<2000;j++){var k=j/2000; d[j]*=k; d[len-1-j]*=k;}
-    }
-    var src=ctx.createBufferSource(); src.buffer=buf; src.loop=true;
-    var bp=ctx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=900; bp.Q.value=.6;
-    var hp=ctx.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=180;
-    waterGain=ctx.createGain(); waterGain.gain.value=.4;
-    // ondulação lenta do fluxo (volume e brilho)
-    var lfo=ctx.createOscillator(), lfoG=ctx.createGain(); lfo.frequency.value=.11; lfoG.gain.value=.13;
-    lfo.connect(lfoG); lfoG.connect(waterGain.gain);
-    var lfo2=ctx.createOscillator(), lfo2G=ctx.createGain(); lfo2.frequency.value=.07; lfo2G.gain.value=350;
-    lfo2.connect(lfo2G); lfo2G.connect(bp.frequency);
-    src.connect(hp); hp.connect(bp); bp.connect(waterGain); waterGain.connect(master);
-    var wv=ctx.createGain(); wv.gain.value=.25; waterGain.connect(wv); wv.connect(verb);
-    src.start(); lfo.start(); lfo2.start();
-  }
-  function drop(t){
-    var o=ctx.createOscillator(), g=ctx.createGain(), f=900+Math.random()*900;
-    o.type='sine'; o.frequency.setValueAtTime(f,t); o.frequency.exponentialRampToValueAtTime(f*2.2,t+.06);
-    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.018,t+.005); g.gain.exponentialRampToValueAtTime(.0001,t+.18);
-    o.connect(g); g.connect(verb); g.connect(dry); o.start(t); o.stop(t+.2);
-  }
-  function pad(freqs,t,dur){
-    freqs.forEach(function(f,i){
-      [0,-6,6].forEach(function(det){
-        var o=ctx.createOscillator(), g=ctx.createGain();
-        o.type=i===0?'sine':'triangle'; o.frequency.value=f; o.detune.value=det;
-        var peak=(i===0?.10:.045)/3;
-        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(peak,t+3); g.gain.setValueAtTime(peak,t+dur-3); g.gain.linearRampToValueAtTime(0,t+dur+1.5);
-        o.connect(g); g.connect(lp); o.start(t); o.stop(t+dur+2);
-      });
+  // Nota de piano suave: parciais harmônicos com decaimento natural
+  function note(m,t,vel){
+    var f=hz(m), dur=m<55?5:3.6, g=ctx.createGain();
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vel,t+.012);
+    g.gain.exponentialRampToValueAtTime(vel*.35,t+.5); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    g.connect(dry); g.connect(verb);
+    [[1,1],[2,.42],[3,.16],[4,.07],[5,.03]].forEach(function(h){
+      var o=ctx.createOscillator(), og=ctx.createGain();
+      o.type='sine'; o.frequency.value=f*h[0]; o.detune.value=(h[0]>1?(Math.random()*4-2):0);
+      og.gain.value=h[1]/(1+h[0]*0.15*(m>72?1.5:1));
+      o.connect(og); og.connect(g); o.start(t); o.stop(t+dur+.05);
     });
   }
-  function bell(t){
-    var f=BELLS[Math.floor(Math.random()*BELLS.length)], o=ctx.createOscillator(), g=ctx.createGain();
-    o.type='sine'; o.frequency.value=f;
-    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.035,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+4);
-    o.connect(g); g.connect(verb); g.connect(dry); o.start(t); o.stop(t+4.2);
+  var bar=0, nextT=0;
+  function scheduleBar(){
+    var ch=BARS[bar%BARS.length];
+    for(var r=0;r<2;r++) for(var k=0;k<8;k++){
+      var i=PAT[k], t=nextT+(r*8+k)*STEP + (Math.random()*0.012);
+      var vel=(k===0?.11:(i<2?.085:.07))*(r?0.92:1);
+      note(ch[i],t,vel);
+    }
+    nextT+=16*STEP; bar++;
   }
-  var step=0, BAR=9;
-  function schedule(){
-    var t=ctx.currentTime+.1;
-    pad(CHORDS[step%CHORDS.length],t,BAR);
-    var n=1+Math.floor(Math.random()*3); for(var k=0;k<n;k++) bell(t+1.5+Math.random()*(BAR-3));
-    var d=3+Math.floor(Math.random()*4); for(var q=0;q<d;q++) drop(t+Math.random()*BAR);
-    step++; timers.push(setTimeout(schedule,(BAR-1)*1000));
-  }
+  function loop(){ while(nextT < ctx.currentTime+2*16*STEP) scheduleBar(); timer=setTimeout(loop,1000); }
   function ui(){btn.setAttribute('aria-pressed',playing?'true':'false'); lbl.textContent=playing?'Som ligado':'Som ambiente';}
   function play(){
     if(playing) return; if(!ctx) build();
-    ctx.resume(); playing=true; schedule();
+    ctx.resume(); playing=true; nextT=Math.max(nextT,ctx.currentTime+.15); loop();
     master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
-    master.gain.linearRampToValueAtTime(VOL,ctx.currentTime+5); ui();
+    master.gain.linearRampToValueAtTime(VOL,ctx.currentTime+4); ui();
   }
   function stop(){
-    if(!playing) return; playing=false; timers.forEach(clearTimeout); timers=[];
+    if(!playing) return; playing=false; clearTimeout(timer);
     master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
-    master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.5); setTimeout(function(){if(!playing)ctx.suspend()},1700); ui();
+    master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.5);
+    setTimeout(function(){ if(!playing){ ctx.close(); ctx=null; nextT=0; } },1700); ui();
   }
   btn.addEventListener('click',function(e){e.stopPropagation(); if(playing){stop();setPref('off');}else{play();setPref('on');}});
-  // Primeira interação inicia o som suavemente (exceto se a visitante já desligou antes)
   function first(e){
     ['pointerdown','keydown','touchstart'].forEach(function(ev){document.removeEventListener(ev,first,true)});
     if(e && e.target && e.target.closest && e.target.closest('#sound-btn')) return;

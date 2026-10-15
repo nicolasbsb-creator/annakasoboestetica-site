@@ -630,7 +630,7 @@ var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portf�
 
 <script>
 /* ============================================================
-   SOM AMBIENTE — trilha original gerada no navegador (sem
+   SOM AMBIENTE — trilha original + riacho, gerados no navegador (sem
    arquivos de áudio e sem direitos autorais). Navegadores só
    permitem som após uma interação: começa no 1º clique/toque.
    ============================================================ */
@@ -653,6 +653,35 @@ var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portf�
     verb=ctx.createConvolver(); verb.buffer=impulse();
     var wet=ctx.createGain(); wet.gain.value=.55; dry=ctx.createGain(); dry.gain.value=.6;
     lp.connect(dry); lp.connect(verb); verb.connect(wet); dry.connect(master); wet.connect(master);
+    buildWater();
+  }
+  /* Riacho: ruído "marrom" filtrado, com ondulação lenta + gotas esparsas */
+  var waterGain;
+  function buildWater(){
+    var len=ctx.sampleRate*6, buf=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(var c=0;c<2;c++){var d=buf.getChannelData(c),last=0;
+      for(var i=0;i<len;i++){var w=Math.random()*2-1; last=(last+0.02*w)/1.02; d[i]=last*3.2;}
+      // suaviza a emenda do loop
+      for(var j=0;j<2000;j++){var k=j/2000; d[j]*=k; d[len-1-j]*=k;}
+    }
+    var src=ctx.createBufferSource(); src.buffer=buf; src.loop=true;
+    var bp=ctx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=900; bp.Q.value=.6;
+    var hp=ctx.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=180;
+    waterGain=ctx.createGain(); waterGain.gain.value=.4;
+    // ondulação lenta do fluxo (volume e brilho)
+    var lfo=ctx.createOscillator(), lfoG=ctx.createGain(); lfo.frequency.value=.11; lfoG.gain.value=.13;
+    lfo.connect(lfoG); lfoG.connect(waterGain.gain);
+    var lfo2=ctx.createOscillator(), lfo2G=ctx.createGain(); lfo2.frequency.value=.07; lfo2G.gain.value=350;
+    lfo2.connect(lfo2G); lfo2G.connect(bp.frequency);
+    src.connect(hp); hp.connect(bp); bp.connect(waterGain); waterGain.connect(master);
+    var wv=ctx.createGain(); wv.gain.value=.25; waterGain.connect(wv); wv.connect(verb);
+    src.start(); lfo.start(); lfo2.start();
+  }
+  function drop(t){
+    var o=ctx.createOscillator(), g=ctx.createGain(), f=900+Math.random()*900;
+    o.type='sine'; o.frequency.setValueAtTime(f,t); o.frequency.exponentialRampToValueAtTime(f*2.2,t+.06);
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.018,t+.005); g.gain.exponentialRampToValueAtTime(.0001,t+.18);
+    o.connect(g); g.connect(verb); g.connect(dry); o.start(t); o.stop(t+.2);
   }
   function pad(freqs,t,dur){
     freqs.forEach(function(f,i){
@@ -676,6 +705,7 @@ var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portf�
     var t=ctx.currentTime+.1;
     pad(CHORDS[step%CHORDS.length],t,BAR);
     var n=1+Math.floor(Math.random()*3); for(var k=0;k<n;k++) bell(t+1.5+Math.random()*(BAR-3));
+    var d=3+Math.floor(Math.random()*4); for(var q=0;q<d;q++) drop(t+Math.random()*BAR);
     step++; timers.push(setTimeout(schedule,(BAR-1)*1000));
   }
   function ui(){btn.setAttribute('aria-pressed',playing?'true':'false'); lbl.textContent=playing?'Som ligado':'Som ambiente';}

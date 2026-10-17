@@ -248,16 +248,6 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
 .consent-actions{display:flex;flex-wrap:wrap;gap:10px}
 .consent button{font-family:var(--body);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:11px 18px;border-radius:999px;cursor:pointer;border:1px solid var(--cacau);background:transparent;color:var(--cacau)}
 .consent button.accept{background:var(--bordo);border-color:var(--bordo);color:var(--creme)}
-/* Som ambiente */
-.sound{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:10px;background:var(--creme-claro);color:var(--cacau);border:1px solid var(--rose);border-radius:999px;padding:10px 16px 10px 12px;font-family:var(--body);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;cursor:pointer;box-shadow:0 8px 24px rgba(65,49,49,.15)}
-.sound:hover{border-color:var(--bordo)}
-.sound .bars{display:flex;align-items:flex-end;gap:2px;height:14px}
-.sound .bars i{display:block;width:3px;height:4px;background:var(--bordo);border-radius:2px}
-.sound[aria-pressed="true"] .bars i{animation:eq 1.2s ease-in-out infinite}
-.sound[aria-pressed="true"] .bars i:nth-child(2){animation-delay:.2s}
-.sound[aria-pressed="true"] .bars i:nth-child(3){animation-delay:.4s}
-@keyframes eq{0%,100%{height:4px}50%{height:14px}}
-@media (max-width:520px){.sound span{display:none}.sound{padding:12px}}
 .reveal{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
 .reveal.d2{animation-delay:.12s}.reveal.d3{animation-delay:.24s}
 @keyframes rise{from{opacity:.001;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -535,7 +525,6 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
   </div>
 </footer>
 
-<button class="sound" id="sound-btn" type="button" aria-pressed="false" aria-label="Ligar ou desligar som ambiente"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="sound-label">Som ambiente</span></button>
 <a class="float" href="https://wa.me/message/2LP544542QRXH1" target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp"><svg><use href="#wa"/></svg></a>
 
 <div class="consent" id="consent" role="dialog" aria-labelledby="consent-title" hidden>
@@ -628,119 +617,6 @@ var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portf�
   /* Reabrir preferências pelo rodapé (revogar ou aceitar depois) */
   var pref=document.getElementById('cookie-prefs');
   if(pref) pref.addEventListener('click',function(e){e.preventDefault();delC();box.hidden=false;});
-})();
-</script>
-
-<script>
-/* ============================================================
-   SOM AMBIENTE — balada lenta em saxofone solo (melodia original),
-   sintetizada no navegador: palheta, sopro, vibrato e ambiência.
-   Sem arquivos de áudio. Navegadores só permitem som após uma
-   interação: começa no 1º clique/toque.
-   ============================================================ */
-(function(){
-  var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
-  var btn=document.getElementById('sound-btn'), lbl=document.getElementById('sound-label');
-  var KEY='ak_sound', ctx=null, master=null, verb=null, dry=null, playing=false, timer=null;
-  function pref(){try{return localStorage.getItem(KEY)}catch(e){return null}}
-  function setPref(v){try{localStorage.setItem(KEY,v)}catch(e){}}
-  var VOL=0.16, BEAT=0.92, TR=-5; // ~65 bpm; transposição para região de sax tenor
-  // [nota MIDI, tempos]; null = respiração
-  var MEL=[[69,1.5],[67,.5],[65,1],[72,1],[69,3],[null,1],
-    [70,1.5],[69,.5],[67,1],[74,1],[72,3],[null,1],
-    [69,1],[72,1],[77,1.5],[76,.5],[74,2],[72,1],[69,1],
-    [70,1.5],[69,.5],[67,1],[64,1],[65,3],[null,1],
-    [72,1.5],[74,.5],[72,1],[69,1],[67,1.5],[69,.5],[70,2],
-    [69,1],[67,1],[65,1],[62,1],[64,2],[67,1.5],[null,.5],
-    [65,1.5],[67,.5],[69,1],[72,1],[70,1],[69,1],[67,2],
-    [65,5],[null,3]];
-  function hz(m){return 440*Math.pow(2,(m+TR-69)/12);}
-  function impulse(){var len=ctx.sampleRate*3.2,b=ctx.createBuffer(2,len,ctx.sampleRate);
-    for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2);}return b;}
-  var osc,osc2,vca,lfoG,cut,chiff;
-  function build(){
-    ctx=new AC(); master=ctx.createGain(); master.gain.value=0;
-    var hp=ctx.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=110;
-    master.connect(hp); hp.connect(ctx.destination);
-    verb=ctx.createConvolver(); verb.buffer=impulse();
-    var wet=ctx.createGain(); wet.gain.value=.42; dry=ctx.createGain(); dry.gain.value=.75;
-    dry.connect(master); verb.connect(wet); wet.connect(master);
-    // Voz do saxofone: duas ondas de palheta levemente desafinadas
-    osc=ctx.createOscillator(); osc.type='sawtooth';
-    osc2=ctx.createOscillator(); osc2.type='square'; osc2.detune.value=-6;
-    var o1=ctx.createGain(); o1.gain.value=.55; var o2=ctx.createGain(); o2.gain.value=.18;
-    osc.connect(o1); osc2.connect(o2);
-    var mix=ctx.createGain(); o1.connect(mix); o2.connect(mix);
-    // Vibrato (atrasado, como num sopro real)
-    var lfo=ctx.createOscillator(); lfo.frequency.value=5.1; lfoG=ctx.createGain(); lfoG.gain.value=0;
-    lfo.connect(lfoG); lfoG.connect(osc.detune); lfoG.connect(osc2.detune); lfo.start();
-    // Sopro: ruído suave que acompanha o som
-    var nb=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate), nd=nb.getChannelData(0);
-    for(var i=0;i<nd.length;i++) nd[i]=Math.random()*2-1;
-    var noise=ctx.createBufferSource(); noise.buffer=nb; noise.loop=true;
-    var nbp=ctx.createBiquadFilter(); nbp.type='bandpass'; nbp.frequency.value=1800; nbp.Q.value=.8;
-    var ng=ctx.createGain(); ng.gain.value=.05; noise.connect(nbp); nbp.connect(ng); ng.connect(mix);
-    chiff=ctx.createGain(); chiff.gain.value=0; nbp.connect(chiff);
-    // Corpo do instrumento: formantes + brilho que abre com o sopro
-    var sh=ctx.createWaveShaper(), curve=new Float32Array(1024);
-    for(var k=0;k<1024;k++){var x=k/511.5-1; curve[k]=Math.tanh(1.6*x)/Math.tanh(1.6);} sh.curve=curve;
-    var f1=ctx.createBiquadFilter(); f1.type='peaking'; f1.frequency.value=520; f1.Q.value=1.1; f1.gain.value=5;
-    var f2=ctx.createBiquadFilter(); f2.type='peaking'; f2.frequency.value=1450; f2.Q.value=1.3; f2.gain.value=3.5;
-    cut=ctx.createBiquadFilter(); cut.type='lowpass'; cut.frequency.value=900; cut.Q.value=.6;
-    vca=ctx.createGain(); vca.gain.value=0;
-    mix.connect(sh); sh.connect(f1); f1.connect(f2); f2.connect(cut); cut.connect(vca); chiff.connect(vca);
-    vca.connect(dry); vca.connect(verb);
-    osc.start(); osc2.start(); noise.start();
-  }
-  var idx=0, nextT=0, prevRest=true;
-  function scheduleNote(){
-    var ev=MEL[idx%MEL.length], dur=ev[1]*BEAT, t=nextT, nxt=MEL[(idx+1)%MEL.length];
-    if(ev[0]===null){ prevRest=true; }
-    else{
-      var f=hz(ev[0]), v=.30*(0.9+Math.random()*.1)*(ev[1]>=2?1.05:1);
-      if(prevRest){
-        osc.frequency.setValueAtTime(f,t); osc2.frequency.setValueAtTime(f,t);
-        vca.gain.setValueAtTime(0,t); vca.gain.linearRampToValueAtTime(v,t+.16);
-        chiff.gain.setValueAtTime(0,t); chiff.gain.linearRampToValueAtTime(.12,t+.03); chiff.gain.linearRampToValueAtTime(0,t+.22);
-      }else{
-        osc.frequency.setTargetAtTime(f,t,.028); osc2.frequency.setTargetAtTime(f,t,.028);
-        vca.gain.setTargetAtTime(v*.78,t,.02); vca.gain.setTargetAtTime(v,t+.06,.05);
-      }
-      // brilho: abre no ataque e repousa
-      cut.frequency.setTargetAtTime(1900,t,.04); cut.frequency.setTargetAtTime(1100,t+.18,.25);
-      // vibrato entra devagar em notas longas
-      lfoG.gain.setValueAtTime(3,t);
-      if(dur>.8) lfoG.gain.linearRampToValueAtTime(15,t+Math.min(dur*.7,1.2));
-      // leve crescendo/decrescendo em notas longas
-      if(dur>1.8){ vca.gain.setTargetAtTime(v*1.08,t+.3,dur*.25); vca.gain.setTargetAtTime(v*.85,t+dur*.6,dur*.2); }
-      if(!nxt || nxt[0]===null){ vca.gain.setTargetAtTime(0,t+dur-.32,.09); }
-      prevRest=false;
-    }
-    nextT+=dur; idx++;
-  }
-  function loop(){ while(nextT < ctx.currentTime+4) scheduleNote(); timer=setTimeout(loop,500); }
-  function ui(){btn.setAttribute('aria-pressed',playing?'true':'false'); lbl.textContent=playing?'Som ligado':'Som ambiente';}
-  function play(){
-    if(playing) return; if(!ctx) build();
-    ctx.resume(); playing=true; nextT=Math.max(nextT,ctx.currentTime+.15); loop();
-    master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
-    master.gain.linearRampToValueAtTime(VOL,ctx.currentTime+4); ui();
-  }
-  function stop(){
-    if(!playing) return; playing=false; clearTimeout(timer);
-    master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
-    master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.5);
-    setTimeout(function(){ if(!playing){ ctx.close(); ctx=null; nextT=0; idx=0; prevRest=true; } },1700); ui();
-  }
-  btn.addEventListener('click',function(e){e.stopPropagation(); if(playing){stop();setPref('off');}else{play();setPref('on');}});
-  function first(e){
-    ['pointerdown','keydown','touchstart'].forEach(function(ev){document.removeEventListener(ev,first,true)});
-    if(e && e.target && e.target.closest && e.target.closest('#sound-btn')) return;
-    if(pref()!=='off') play();
-  }
-  ['pointerdown','keydown','touchstart'].forEach(function(ev){document.addEventListener(ev,first,true)});
-  document.addEventListener('visibilitychange',function(){ if(!ctx) return; if(document.hidden) ctx.suspend(); else if(playing) ctx.resume(); });
-  ui();
 })();
 </script>
 

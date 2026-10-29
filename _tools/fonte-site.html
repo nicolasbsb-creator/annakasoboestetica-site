@@ -677,7 +677,7 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
 var GA4_ID   = 'G-YKND4ZJ5JF';  // GA4: Anna Kasobo Estética – Site (propriedade 558991469)
 var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portfólio Anna Kasobo Estética)
 var ADS_TAG  = 'G-FGT4NSPHHS';  // Tag do Google da conta Google Ads 231-385-4274 (Anna Kasobo)
-var ADS_CONV = '';  // Conversão "Clique no WhatsApp" (formato AW-XXXXXXXXX/rótulo) — preenchida após criar a ação no Google Ads
+var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no WhatsApp (site)" — meta Contato, principal
 
 (function(){
   var gaOk = /^G-[A-Z0-9]{6,}$/.test(GA4_ID);
@@ -707,6 +707,7 @@ var ADS_CONV = '';  // Conversão "Clique no WhatsApp" (formato AW-XXXXXXXXX/ró
     gtag('js',new Date());
     gtag('config',GA4_ID);
     if(/^G-[A-Z0-9]{6,}$/.test(ADS_TAG)) gtag('config',ADS_TAG);
+    if(ADS_CONV) gtag('config',ADS_CONV.split('/')[0]);
   }
 
   /* Pixel da Meta: só carrega com consentimento (LGPD) */

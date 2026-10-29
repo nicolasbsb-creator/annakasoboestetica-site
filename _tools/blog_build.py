@@ -43,13 +43,13 @@ a{color:var(--bordo)}
 .wide{max-width:1180px}
 header.top{border-bottom:1px solid rgba(205,146,140,.45);background:var(--creme-claro);position:sticky;top:0;z-index:5}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
-.logo{width:210px;max-width:52vw;height:auto;display:block}
+.logo{width:84px;height:auto;display:block}
 .nav-links{display:flex;gap:10px;align-items:center}
 .pill{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--cacau);border:1px solid var(--rose);border-radius:999px;padding:10px 16px;white-space:nowrap}
 .pill:hover{background:var(--cacau);color:var(--creme);border-color:var(--cacau)}
 .pill.solid{background:var(--bordo);border-color:var(--bordo);color:var(--creme)}
 .pill.solid:hover{background:var(--cacau);border-color:var(--cacau)}
-@media (max-width:560px){.pill.hide-sm{display:none}.pill{padding:9px 12px;font-size:.66rem;letter-spacing:.1em}.logo{width:150px}}
+@media (max-width:560px){.pill.hide-sm{display:none}.pill{padding:9px 12px;font-size:.66rem;letter-spacing:.1em}.logo{width:66px}}
 .hero{background:var(--nude);padding-block:clamp(44px,8vw,86px)}
 .eyebrow{font-size:.74rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--terracota);display:flex;align-items:center;gap:14px;margin:0}
 .eyebrow::before{content:"";width:34px;height:1px;background:currentColor}

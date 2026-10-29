@@ -7,6 +7,7 @@
 <meta name="description" content="Kasobo Sculpt: protocolo exclusivo e não invasivo da Dra. Anna Kasobo para gordura localizada e contorno corporal, montado para o seu corpo. Liberty Mall, Asa Norte, Brasília.">
 <link rel="canonical" href="https://www.annakasoboestetica.com/kasobo-sculpt/">
 <meta name="theme-color" content="#413131">
+<meta name="facebook-domain-verification" content="yk5st4zi053ulisycx8pppvm3vg4m7">
 <link rel="icon" type="image/png" sizes="48x48" href="../img/favicon-48.png">
 <link rel="icon" type="image/png" sizes="512x512" href="../img/favicon-512.png">
 <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
@@ -591,13 +592,14 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
    - Meta: Gerenciador de Eventos > Fontes de dados > Pixel (número)
    ============================================================ */
 var GA4_ID   = 'G-YKND4ZJ5JF';  // GA4: Anna Kasobo Estética – Site (propriedade 558991469)
-var PIXEL_ID = '1040591382361864';  // Pixel: Site Anna Kasobo Estética (portfólio Anna Kasobo Estética)
+var PIXEL_IDS = ['1040591382361864', '5957422607626050'];  // 1º: Site Anna Kasobo Estética (portfólio Anna Kasobo Estética) · 2º: Pixel de Anna Kasobo (portfólio Anna Kasobo, usado nos anúncios)
 var ADS_TAG  = 'G-FGT4NSPHHS';  // Tag do Google da conta Google Ads 231-385-4274 (Anna Kasobo)
 var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no WhatsApp (site)" — meta Contato, principal
 
 (function(){
   var gaOk = /^G-[A-Z0-9]{6,}$/.test(GA4_ID);
-  var pxOk = /^\d{10,20}$/.test(PIXEL_ID);
+  PIXEL_IDS = PIXEL_IDS.filter(function(id){return /^\d{10,20}$/.test(id)});
+  var pxOk = PIXEL_IDS.length>0;
   var KEY = 'ak_consent';
   function getC(){try{return localStorage.getItem(KEY)}catch(e){return null}}
   function setC(v){try{localStorage.setItem(KEY,v)}catch(e){}}
@@ -634,7 +636,7 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
     (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('consent','grant');fbq('init',PIXEL_ID);fbq('track','PageView');
+    fbq('consent','grant');PIXEL_IDS.forEach(function(id){fbq('init',id)});fbq('track','PageView');
   }
   function grant(){ setC('sim'); gtag('consent','update',GRANTED); loadPixel(); }
   function deny(){ setC('nao'); gtag('consent','update',DENIED); if(window.fbq) fbq('consent','revoke'); }

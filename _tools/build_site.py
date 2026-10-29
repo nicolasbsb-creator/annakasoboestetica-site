@@ -80,6 +80,7 @@ def head(titulo, desc, url, og, extra_ld, prefixo, css_extra=''):
 <meta name="description" content="{H.escape(desc)}">
 <link rel="canonical" href="{url}">
 <meta name="theme-color" content="#413131">
+<meta name="facebook-domain-verification" content="yk5st4zi053ulisycx8pppvm3vg4m7">
 <link rel="icon" type="image/png" sizes="48x48" href="{prefixo}img/favicon-48.png">
 <link rel="icon" type="image/png" sizes="512x512" href="{prefixo}img/favicon-512.png">
 <link rel="apple-touch-icon" href="{prefixo}img/apple-touch-icon.png">

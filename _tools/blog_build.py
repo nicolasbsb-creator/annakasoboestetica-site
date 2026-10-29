@@ -212,7 +212,7 @@ def build():
     meta = [{k: p[k] for k in ("slug","title","date","category","summary","read_min")} for p in posts]
     json.dump(meta, open(os.path.join(out, "posts.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
-    urls = [f"{SITE}/", f"{SITE}/blog/", f"{SITE}/privacidade.html"] + [f'{SITE}/blog/{p["slug"]}.html' for p in posts]
+    urls = [f"{SITE}/", f"{SITE}/kasobo-sculpt/", f"{SITE}/blog/", f"{SITE}/privacidade.html"] + [f'{SITE}/blog/{p["slug"]}.html' for p in posts]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
          "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(sm)

@@ -136,6 +136,8 @@ def page(title, desc, canonical, body, extra_head=""):
 </head>
 <body>
 {body}
+<script>/* Metricool: só para quem aceitou os cookies no site (LGPD) */
+try{{if(localStorage.getItem('ak_consent')==='sim'){{var i=new Image(1,1);i.alt='';i.src='https://tracker.metricool.com/c3po.jpg?hash=cfef056ff1777595951f0740a65c2356';}}}}catch(e){{}}</script>
 </body>
 </html>
 """

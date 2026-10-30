@@ -750,7 +750,14 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
     (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('consent','grant');PIXEL_IDS.forEach(function(id){fbq('init',id)});fbq('track','PageView');
   }
-  function grant(){ setC('sim'); gtag('consent','update',GRANTED); loadPixel(); }
+  /* Metricool: pixel de visitas, só com consentimento (LGPD) */
+  var METRICOOL_HASH = 'cfef056ff1777595951f0740a65c2356';
+  function loadMetricool(){
+    if(window.__mcool || !METRICOOL_HASH) return; window.__mcool = true;
+    var i = new Image(1,1); i.alt=''; i.referrerPolicy='no-referrer-when-downgrade';
+    i.src = 'https://tracker.metricool.com/c3po.jpg?hash=' + METRICOOL_HASH;
+  }
+  function grant(){ setC('sim'); gtag('consent','update',GRANTED); loadPixel(); loadMetricool(); }
   function deny(){ setC('nao'); gtag('consent','update',DENIED); if(window.fbq) fbq('consent','revoke'); }
 
   /* Eventos: o que importa para a clínica */
@@ -775,7 +782,7 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
   /* Aviso LGPD */
   var box=document.getElementById('consent');
   var c=getC();
-  if(c==='sim') loadPixel();
+  if(c==='sim'){ loadPixel(); loadMetricool(); }
   else if(c!=='nao' && (gaOk||pxOk)) box.hidden=false;
   document.getElementById('consent-yes').addEventListener('click',function(){box.hidden=true;grant()});
   document.getElementById('consent-no').addEventListener('click',function(){box.hidden=true;deny()});

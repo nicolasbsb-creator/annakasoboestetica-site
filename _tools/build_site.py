@@ -68,6 +68,34 @@ FAQ_LD = {"@context": "https://schema.org", "@type": "FAQPage",
           "mainEntity": [{"@type": "Question", "name": q,
                           "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]}
 
+
+def adsense_head():
+    """Tag do AdSense + Consent Mode (padrão negado, liberado só com 'Aceitar'). Vazio se não configurado."""
+    import json as _j, os as _o
+    try:
+        cid = _j.load(open(_o.path.join(ROOT, '_tools', 'adsense.json'), encoding='utf-8')).get('client', '').strip()
+    except Exception:
+        cid = ''
+    if not cid.startswith('ca-pub-'):
+        return ''
+    return ('<meta name="google-adsense-account" content="' + cid + '">\n'
+            '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
+            "var _g={ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'},"
+            "_d={ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'};"
+            "var _c=null;try{_c=localStorage.getItem('ak_consent')}catch(e){}"
+            "gtag('consent','default',_c==='sim'?_g:_d);</script>\n"
+            '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + cid + '" crossorigin="anonymous"></script>\n')
+
+def adsense_txt():
+    import json as _j, os as _o
+    try:
+        cid = _j.load(open(_o.path.join(ROOT, '_tools', 'adsense.json'), encoding='utf-8')).get('client', '').strip()
+    except Exception:
+        cid = ''
+    p = _o.path.join(ROOT, 'ads.txt')
+    if cid.startswith('ca-pub-'):
+        open(p, 'w').write('google.com, ' + cid.replace('ca-', '') + ', DIRECT, f08c47fec0942fa0\n')
+
 def head(titulo, desc, url, og, extra_ld, prefixo, css_extra=''):
     lds = ''.join('<script type="application/ld+json">' + json.dumps(x, ensure_ascii=False) + '</script>\n'
                   for x in extra_ld)
@@ -81,6 +109,7 @@ def head(titulo, desc, url, og, extra_ld, prefixo, css_extra=''):
 <link rel="canonical" href="{url}">
 <meta name="theme-color" content="#413131">
 <meta name="facebook-domain-verification" content="yk5st4zi053ulisycx8pppvm3vg4m7">
+{adsense_head()}
 <link rel="icon" type="image/png" sizes="48x48" href="{prefixo}img/favicon-48.png">
 <link rel="icon" type="image/png" sizes="512x512" href="{prefixo}img/favicon-512.png">
 <link rel="apple-touch-icon" href="{prefixo}img/apple-touch-icon.png">
@@ -210,3 +239,4 @@ lp = head('Kasobo Sculpt | Remodelagem corporal não invasiva em Brasília',
 os.makedirs(os.path.join(ROOT, 'kasobo-sculpt'), exist_ok=True)
 open(os.path.join(ROOT, 'kasobo-sculpt', 'index.html'), 'w', encoding='utf-8').write(lp)
 print('home', len(home) // 1024, 'KB | sculpt', len(lp) // 1024, 'KB')
+adsense_txt()

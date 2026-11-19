@@ -166,6 +166,8 @@ def page(title, desc, canonical, body, extra_head=""):
 {body}
 <script>/* Metricool: só para quem aceitou os cookies no site (LGPD) */
 try{{if(localStorage.getItem('ak_consent')==='sim'){{var i=new Image(1,1);i.alt='';i.src='https://tracker.metricool.com/c3po.jpg?hash=cfef056ff1777595951f0740a65c2356';}}}}catch(e){{}}</script>
+<script>/* Google Analytics 4: só para quem aceitou os cookies no site (LGPD) */
+try{{if(localStorage.getItem('ak_consent')==='sim'){{window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){{dataLayer.push(arguments)}};var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=G-YKND4ZJ5JF';document.head.appendChild(g);gtag('js',new Date());gtag('config','G-YKND4ZJ5JF');}}}}catch(e){{}}</script>
 </body>
 </html>
 """

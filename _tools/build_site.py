@@ -104,6 +104,8 @@ def head(titulo, desc, url, og, extra_ld, prefixo, css_extra=''):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{H.escape(titulo)}</title>
 <meta name="description" content="{H.escape(desc)}">
 <link rel="canonical" href="{url}">

@@ -1,0 +1,6 @@
+# Relatos de vulnerabilidade de segurança do site annakasoboestetica.com
+Contact: https://wa.me/message/2LP544542QRXH1
+Expires: 2027-11-21T00:00:00.000Z
+Preferred-Languages: pt, en
+Canonical: https://www.annakasoboestetica.com/.well-known/security.txt
+Policy: https://www.annakasoboestetica.com/privacidade.html

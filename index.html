@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Anna Kasobo Estética Avançada | Harmonização corporal em Brasília</title>
 <meta name="description" content="Estética avançada e harmonização corporal em Brasília (Asa Norte). Protocolo exclusivo Kasobo Sculpt, Kasobo 180º e Kasobo Slim. Agende sua consulta estética personalizada.">
 <link rel="canonical" href="https://www.annakasoboestetica.com/">
@@ -29,9 +31,7 @@
 <meta name="twitter:description" content="Estética avançada e harmonização corporal em Brasília (Asa Norte). Protocolo exclusivo Kasobo Sculpt, Kasobo 180º e Kasobo Slim. Agende sua consulta estética personalizada.">
 <meta name="twitter:image" content="https://www.annakasoboestetica.com/img/og-anna-kasobo.jpg">
 <link rel="preload" as="image" href="img/dra-anna-kasobo.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
 /* Layout: editorial em faixas alternadas — creme/nude para respirar, marrom profundo para os momentos de autoridade, bordô só na ação */
 :root{
@@ -437,7 +437,7 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
         <div class="step">
           <span class="step-n">iii.</span>
           <h3>Remodelagem não invasiva</h3>
-          <p>Equipamentos de última geração atuam na gordura localizada e no contorno corporal, de forma 100% segura e não invasiva.</p>
+          <p>Equipamentos de última geração atuam na gordura localizada e no contorno corporal, de forma segura e não invasiva.</p>
         </div>
       </div>
       <div class="sculpt-foot">
@@ -458,13 +458,13 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
         <article class="sig">
           <span class="sig-tag">Remodelagem ideal</span>
           <h3>Kasobo 180º</h3>
-          <p>Metodologia criada para gordurinhas menores, 100% segura, sem tirar você da sua rotina. A remodelagem ideal.</p>
+          <p>Metodologia criada para gordurinhas menores, segura e sem tirar você da sua rotina. A remodelagem ideal.</p>
           <dl><dt>Indicação</dt><dd>Gordurinhas menores</dd></dl>
         </article>
         <article class="sig">
           <span class="sig-tag">Minimamente invasivo</span>
           <h3>Kasobo Slim</h3>
-          <p>É um projeto minimamente invasivo, super tranquilo e com resultados desde a primeira sessão. Além da redução de gordura, trabalhamos a musculatura.</p>
+          <p>É um projeto minimamente invasivo, super tranquilo e com evolução acompanhada desde a primeira sessão. Além da redução de gordura, trabalhamos a musculatura.</p>
           <dl><dt>Foco</dt><dd>Redução de gordura e musculatura</dd></dl>
         </article>
       </div>
@@ -582,7 +582,7 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
           <p class="eyebrow">Antes e depois</p>
           <h2 style="margin-top:18px">Resultados de pacientes reais</h2>
         </div>
-        <p class="lede">Arraste a barra de cada imagem para comparar o antes e o depois. Todas as fotos são de pacientes do consultório, publicadas com autorização.</p>
+        <p class="lede">Arraste a barra de cada imagem para comparar o antes e o depois. Todas as fotos são de pacientes do consultório, publicadas com autorização expressa de cada paciente.</p>
       </div>
       <div class="filters" role="group" aria-label="Filtrar por tratamento" id="ba-filters"></div>
       <div class="ba-grid" id="ba-grid"></div>
@@ -684,7 +684,7 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
   <div class="wrap">
     <svg class="foot-logo" viewBox="0 0 594 362" role="img" aria-label="Anna Kasobo Estética Avançada"><use href="#akmono"/></svg>
     <span>© 2026 Anna Kasobo Estética Avançada · CNPJ 43.445.315/0001-55 · Brasília – DF</span>
-    <span>Responsável técnica: Dra. Anna Kasobo · COREN nº 516.318</span>
+    <span>Responsável técnica: Dra. Anna Kasobo (Anna Karolina Soares Borges) · Enfermeira · COREN nº 516.318</span>
     <a href="https://www.annakasoboestetica.com/blog/">Blog</a>
     <a href="privacidade.html">Política de Privacidade</a>
     <a href="#" id="cookie-prefs">Preferências de cookies</a>
@@ -695,7 +695,7 @@ footer a{text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
 
 <div class="consent" id="consent" role="dialog" aria-labelledby="consent-title" hidden>
   <b id="consent-title">Sua privacidade</b>
-  <p>Usamos cookies de análise (Google Analytics) e de marketing (Meta) para entender como o site é usado e melhorar nossa comunicação. Você pode aceitar ou recusar. <a href="privacidade.html">Saiba mais</a>.</p>
+  <p>Com a sua permissão, usamos cookies de análise (Google Analytics e Metricool) e de marketing (Google Ads e Pixel da Meta) para entender como o site é usado e medir nossos anúncios. Nada disso é ativado se você recusar. <a href="privacidade.html">Saiba mais</a>.</p>
   <div class="consent-actions">
     <button class="accept" id="consent-yes" type="button">Aceitar</button>
     <button id="consent-no" type="button">Recusar</button>
@@ -724,9 +724,9 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
   function delC(){try{localStorage.removeItem(KEY)}catch(e){}}
 
   /* ---- Google Consent Mode v2 ----
-     Padrão: tudo NEGADO antes de qualquer tag. A tag do Google carrega,
-     mas sem gravar cookies nem usar dados para anúncios até a visitante
-     aceitar. Ao aceitar, os quatro sinais passam a "granted". */
+     Padrão: tudo NEGADO. As tags do Google (Analytics e Ads) só são
+     carregadas depois que a visitante clica em "Aceitar" (modo básico).
+     Ao aceitar, os quatro sinais passam a "granted". */
   window.dataLayer = window.dataLayer || [];
   window.gtag = function(){ dataLayer.push(arguments); };
   var DENIED = {ad_storage:'denied', analytics_storage:'denied', ad_user_data:'denied', ad_personalization:'denied'};
@@ -736,7 +736,9 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
   gtag('set','url_passthrough',false);
   if(getC()==='sim') gtag('consent','update',GRANTED);
 
-  if(gaOk){
+  /* Tags do Google só carregam depois do "Aceitar" (LGPD: nada é enviado sem consentimento) */
+  function loadGoogle(){
+    if(!gaOk || window.__gload) return; window.__gload = true;
     var s=document.createElement('script');s.async=true;
     s.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;
     document.head.appendChild(s);
@@ -763,11 +765,12 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
     var i = new Image(1,1); i.alt=''; i.referrerPolicy='no-referrer-when-downgrade';
     i.src = 'https://tracker.metricool.com/c3po.jpg?hash=' + METRICOOL_HASH;
   }
-  function grant(){ setC('sim'); gtag('consent','update',GRANTED); loadPixel(); loadMetricool(); }
+  function grant(){ setC('sim'); gtag('consent','update',GRANTED); loadGoogle(); loadPixel(); loadMetricool(); }
   function deny(){ setC('nao'); gtag('consent','update',DENIED); if(window.fbq) fbq('consent','revoke'); }
 
   /* Eventos: o que importa para a clínica */
   function track(gaName,params,metaName){
+    if(getC()!=='sim') return;
     gtag('event',gaName,params);
     if(window.fbq && metaName && getC()==='sim') fbq('track',metaName,params);
   }
@@ -775,7 +778,7 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
     var a=ev.target.closest('a');if(!a)return;
     var h=a.href||'';
     var sec=(a.closest('section,header,footer')||{}).id||(a.classList.contains('float')?'botao_flutuante':'topo');
-    if(h.indexOf('wa.me')>-1){ track('generate_lead',{method:'whatsapp',local:sec},'Contact'); if(ADS_CONV) gtag('event','conversion',{send_to:ADS_CONV}); }
+    if(h.indexOf('wa.me')>-1){ track('generate_lead',{method:'whatsapp',local:sec},'Contact'); if(ADS_CONV && getC()==='sim') gtag('event','conversion',{send_to:ADS_CONV}); }
     else if(h.indexOf('instagram.com')>-1) track('clique_instagram',{local:sec});
     else if(h.indexOf('facebook.com')>-1) track('clique_facebook',{local:sec});
     else if(h.indexOf('google.com/maps')>-1) track('clique_mapa',{local:sec},'FindLocation');
@@ -788,7 +791,7 @@ var ADS_CONV = 'AW-11021833508/9VJSCInexq0dEKSqz4cp';  // Conversão "Clique no 
   /* Aviso LGPD */
   var box=document.getElementById('consent');
   var c=getC();
-  if(c==='sim'){ loadPixel(); loadMetricool(); }
+  if(c==='sim'){ loadGoogle(); loadPixel(); loadMetricool(); }
   else if(c!=='nao' && (gaOk||pxOk)) box.hidden=false;
   document.getElementById('consent-yes').addEventListener('click',function(){box.hidden=true;grant()});
   document.getElementById('consent-no').addEventListener('click',function(){box.hidden=true;deny()});

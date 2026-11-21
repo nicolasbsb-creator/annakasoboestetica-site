@@ -95,9 +95,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
 footer a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(205,146,140,.5)}
 """
 
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap">')
+FONTS = '<link rel="stylesheet" href="/fonts/fonts.css">'
 
 MONO = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="none" stroke="#BE6142" stroke-width="2"/><text x="50" y="62" text-anchor="middle" font-family="Cormorant Garamond,serif" font-style="italic" font-size="38" fill="#840000">AK</text></svg>'
 
@@ -150,6 +148,8 @@ def page(title, desc, canonical, body, extra_head=""):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{canonical}">

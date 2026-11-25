@@ -1,191 +1,193 @@
 {
- "instrucao": "Use o primeiro tema com status 'pendente', na ordem. Ao publicar, mude o status para 'publicado' e preencha 'data' e 'slug'. Quando restarem menos de 10 pendentes, acrescente novos temas no fim, seguindo as diretrizes.",
- "temas": [
-  {
-   "tema": "Não invasivo x invasivo: visão geral",
-   "status": "publicado",
-   "data": "2026-10-28",
-   "slug": "nao-invasivo-x-invasivo"
-  },
-  {
-   "tema": "Criolipólise: como o frio elimina células de gordura (e por que o resultado é gradual)",
-   "status": "publicado",
-   "data": "2026-10-29",
-   "slug": "criolipolise-como-o-frio-age-na-gordura"
-  },
-  {
-   "tema": "Criomodelagem x criolipólise: qual a diferença?",
-   "status": "publicado",
-   "data": "2026-10-30",
-   "slug": "criomodelagem-x-criolipolise"
-  },
-  {
-   "tema": "Gordura localizada x sobrepeso: por que a estética não substitui o emagrecimento",
-   "status": "publicado",
-   "data": "2026-11-04",
-   "slug": "gordura-localizada-x-sobrepeso"
-  },
-  {
-   "tema": "Hidrolipo: o que é um procedimento minimamente invasivo e quando ele entra no plano",
-   "status": "publicado",
-   "data": "2026-11-05",
-   "slug": "hidrolipo-minimamente-invasivo"
-  },
-  {
-   "tema": "Eletrolipólise: correntes elétricas a favor da gordura localizada e da drenagem",
-   "status": "publicado",
-   "data": "2026-11-11",
-   "slug": "eletrolipolise-correntes-eletricas-gordura-localizada"
-  },
-  {
-   "tema": "Tonificação muscular sem academia? O que o estímulo muscular faz (e o que não faz)",
-   "status": "publicado",
-   "data": "2026-11-12",
-   "slug": "tonificacao-muscular-estimulo-eletrico"
-  },
-  {
-   "tema": "Fita métrica x balança: por que as medidas contam uma história que o peso não mostra",
-   "status": "publicado",
-   "data": "2026-11-13",
-   "slug": "fita-metrica-x-balanca-medidas-contam-historia"
-  },
-  {
-   "tema": "Desinflamação: o que significa preparar o corpo de dentro para fora",
-   "status": "publicado",
-   "data": "2026-11-18",
-   "slug": "desinflamacao-preparar-o-corpo-de-dentro-para-fora"
-  },
-  {
-   "tema": "Kasobo Sculpt passo a passo: da leitura do corpo à remodelagem",
-   "status": "publicado",
-   "data": "2026-11-19",
-   "slug": "kasobo-sculpt-passo-a-passo"
-  },
-  {
-   "tema": "Nutracêuticos: o que são e como entram em um protocolo estético",
-   "status": "publicado",
-   "data": "2026-11-20",
-   "slug": "nutraceuticos-o-que-sao-e-como-entram-no-protocolo"
-  },
-  {
-   "tema": "Perder peso e reduzir medidas: onde a estética entra no plano (e onde não entra)",
-   "status": "pendente"
-  },
-  {
-   "tema": "Drenagem e retenção de líquido: quando o inchaço engana o espelho",
-   "status": "pendente"
-  },
-  {
-   "tema": "Gordura abdominal e saúde: por que a circunferência da cintura importa",
-   "status": "pendente"
-  },
-  {
-   "tema": "Mitos sobre gordura localizada: abdominal queima barriga?",
-   "status": "pendente"
-  },
-  {
-   "tema": "Kasobo 180º: cuidar das gordurinhas sem tirar você da rotina",
-   "status": "pendente"
-  },
-  {
-   "tema": "Celulite: graus, causas e o que os tratamentos não invasivos podem fazer",
-   "status": "pendente"
-  },
-  {
-   "tema": "Kasobo Slim: gordura e musculatura trabalhadas no mesmo plano",
-   "status": "pendente"
-  },
-  {
-   "tema": "Flacidez corporal: colágeno, idade e estímulos não invasivos",
-   "status": "pendente"
-  },
-  {
-   "tema": "Autoestima em movimento: quando ver o corpo responder motiva novos hábitos",
-   "status": "pendente"
-  },
-  {
-   "tema": "Pós-procedimento: os cuidados em casa que potencializam o resultado",
-   "status": "pendente"
-  },
-  {
-   "tema": "Depois de emagrecer: flacidez e contorno no pós-emagrecimento",
-   "status": "pendente"
-  },
-  {
-   "tema": "Quantas sessões eu preciso? Por que a resposta depende da avaliação",
-   "status": "pendente"
-  },
-  {
-   "tema": "Alimentação, movimento e procedimentos: como somar esforços sem exageros",
-   "status": "pendente"
-  },
-  {
-   "tema": "Pós-parto e contorno corporal: quando e como começar com segurança",
-   "status": "pendente"
-  },
-  {
-   "tema": "Verão chegando: por que começar o protocolo com antecedência",
-   "status": "pendente"
-  },
-  {
-   "tema": "Microagulhamento corporal: colágeno, estrias e firmeza da pele",
-   "status": "pendente"
-  },
-  {
-   "tema": "Microvasos nas pernas: como funciona a aplicação com glicose",
-   "status": "pendente"
-  },
-  {
-   "tema": "Depilação a laser: mitos e verdades",
-   "status": "pendente"
-  },
-  {
-   "tema": "Toxina botulínica: naturalidade é técnica, não sorte",
-   "status": "pendente"
-  },
-  {
-   "tema": "Microagulhamento facial: poros, manchas e cicatrizes de acne",
-   "status": "pendente"
-  },
-  {
-   "tema": "Peeling retinoico: renovação da pele sem drama",
-   "status": "pendente"
-  },
-  {
-   "tema": "Manchas na pele: o que o peeling de clareamento pode e não pode fazer",
-   "status": "pendente"
-  },
-  {
-   "tema": "Limpeza de pele profissional: por que ela vai além do skincare de casa",
-   "status": "pendente"
-  },
-  {
-   "tema": "Papada: opções não cirúrgicas para o contorno do rosto",
-   "status": "pendente"
-  },
-  {
-   "tema": "Contraindicações: quando o procedimento estético deve esperar",
-   "status": "pendente"
-  },
-  {
-   "tema": "Como escolher um profissional de estética com segurança",
-   "status": "pendente"
-  },
-  {
-   "tema": "Vitamina D e complexo B: quando a reposição é indicada (e por que exige avaliação)",
-   "status": "pendente"
-  },
-  {
-   "tema": "Terapia capilar: queda de cabelo, mesoterapia e laser",
-   "status": "pendente"
-  },
-  {
-   "tema": "Antes e depois: como olhar resultados com olhar crítico",
-   "status": "pendente"
-  },
-  {
-   "tema": "Consulta estética personalizada: o que acontece e como se preparar",
-   "status": "pendente"
-  }
- ]
+  "instrucao": "Use o primeiro tema com status 'pendente', na ordem. Ao publicar, mude o status para 'publicado' e preencha 'data' e 'slug'. Quando restarem menos de 10 pendentes, acrescente novos temas no fim, seguindo as diretrizes.",
+  "temas": [
+    {
+      "tema": "Não invasivo x invasivo: visão geral",
+      "status": "publicado",
+      "data": "2026-10-28",
+      "slug": "nao-invasivo-x-invasivo"
+    },
+    {
+      "tema": "Criolipólise: como o frio elimina células de gordura (e por que o resultado é gradual)",
+      "status": "publicado",
+      "data": "2026-10-29",
+      "slug": "criolipolise-como-o-frio-age-na-gordura"
+    },
+    {
+      "tema": "Criomodelagem x criolipólise: qual a diferença?",
+      "status": "publicado",
+      "data": "2026-10-30",
+      "slug": "criomodelagem-x-criolipolise"
+    },
+    {
+      "tema": "Gordura localizada x sobrepeso: por que a estética não substitui o emagrecimento",
+      "status": "publicado",
+      "data": "2026-11-04",
+      "slug": "gordura-localizada-x-sobrepeso"
+    },
+    {
+      "tema": "Hidrolipo: o que é um procedimento minimamente invasivo e quando ele entra no plano",
+      "status": "publicado",
+      "data": "2026-11-05",
+      "slug": "hidrolipo-minimamente-invasivo"
+    },
+    {
+      "tema": "Eletrolipólise: correntes elétricas a favor da gordura localizada e da drenagem",
+      "status": "publicado",
+      "data": "2026-11-11",
+      "slug": "eletrolipolise-correntes-eletricas-gordura-localizada"
+    },
+    {
+      "tema": "Tonificação muscular sem academia? O que o estímulo muscular faz (e o que não faz)",
+      "status": "publicado",
+      "data": "2026-11-12",
+      "slug": "tonificacao-muscular-estimulo-eletrico"
+    },
+    {
+      "tema": "Fita métrica x balança: por que as medidas contam uma história que o peso não mostra",
+      "status": "publicado",
+      "data": "2026-11-13",
+      "slug": "fita-metrica-x-balanca-medidas-contam-historia"
+    },
+    {
+      "tema": "Desinflamação: o que significa preparar o corpo de dentro para fora",
+      "status": "publicado",
+      "data": "2026-11-18",
+      "slug": "desinflamacao-preparar-o-corpo-de-dentro-para-fora"
+    },
+    {
+      "tema": "Kasobo Sculpt passo a passo: da leitura do corpo à remodelagem",
+      "status": "publicado",
+      "data": "2026-11-19",
+      "slug": "kasobo-sculpt-passo-a-passo"
+    },
+    {
+      "tema": "Nutracêuticos: o que são e como entram em um protocolo estético",
+      "status": "publicado",
+      "data": "2026-11-20",
+      "slug": "nutraceuticos-o-que-sao-e-como-entram-no-protocolo"
+    },
+    {
+      "tema": "Perder peso e reduzir medidas: onde a estética entra no plano (e onde não entra)",
+      "status": "publicado",
+      "data": "2026-11-25",
+      "slug": "perder-peso-e-reduzir-medidas-onde-a-estetica-entra"
+    },
+    {
+      "tema": "Drenagem e retenção de líquido: quando o inchaço engana o espelho",
+      "status": "pendente"
+    },
+    {
+      "tema": "Gordura abdominal e saúde: por que a circunferência da cintura importa",
+      "status": "pendente"
+    },
+    {
+      "tema": "Mitos sobre gordura localizada: abdominal queima barriga?",
+      "status": "pendente"
+    },
+    {
+      "tema": "Kasobo 180º: cuidar das gordurinhas sem tirar você da rotina",
+      "status": "pendente"
+    },
+    {
+      "tema": "Celulite: graus, causas e o que os tratamentos não invasivos podem fazer",
+      "status": "pendente"
+    },
+    {
+      "tema": "Kasobo Slim: gordura e musculatura trabalhadas no mesmo plano",
+      "status": "pendente"
+    },
+    {
+      "tema": "Flacidez corporal: colágeno, idade e estímulos não invasivos",
+      "status": "pendente"
+    },
+    {
+      "tema": "Autoestima em movimento: quando ver o corpo responder motiva novos hábitos",
+      "status": "pendente"
+    },
+    {
+      "tema": "Pós-procedimento: os cuidados em casa que potencializam o resultado",
+      "status": "pendente"
+    },
+    {
+      "tema": "Depois de emagrecer: flacidez e contorno no pós-emagrecimento",
+      "status": "pendente"
+    },
+    {
+      "tema": "Quantas sessões eu preciso? Por que a resposta depende da avaliação",
+      "status": "pendente"
+    },
+    {
+      "tema": "Alimentação, movimento e procedimentos: como somar esforços sem exageros",
+      "status": "pendente"
+    },
+    {
+      "tema": "Pós-parto e contorno corporal: quando e como começar com segurança",
+      "status": "pendente"
+    },
+    {
+      "tema": "Verão chegando: por que começar o protocolo com antecedência",
+      "status": "pendente"
+    },
+    {
+      "tema": "Microagulhamento corporal: colágeno, estrias e firmeza da pele",
+      "status": "pendente"
+    },
+    {
+      "tema": "Microvasos nas pernas: como funciona a aplicação com glicose",
+      "status": "pendente"
+    },
+    {
+      "tema": "Depilação a laser: mitos e verdades",
+      "status": "pendente"
+    },
+    {
+      "tema": "Toxina botulínica: naturalidade é técnica, não sorte",
+      "status": "pendente"
+    },
+    {
+      "tema": "Microagulhamento facial: poros, manchas e cicatrizes de acne",
+      "status": "pendente"
+    },
+    {
+      "tema": "Peeling retinoico: renovação da pele sem drama",
+      "status": "pendente"
+    },
+    {
+      "tema": "Manchas na pele: o que o peeling de clareamento pode e não pode fazer",
+      "status": "pendente"
+    },
+    {
+      "tema": "Limpeza de pele profissional: por que ela vai além do skincare de casa",
+      "status": "pendente"
+    },
+    {
+      "tema": "Papada: opções não cirúrgicas para o contorno do rosto",
+      "status": "pendente"
+    },
+    {
+      "tema": "Contraindicações: quando o procedimento estético deve esperar",
+      "status": "pendente"
+    },
+    {
+      "tema": "Como escolher um profissional de estética com segurança",
+      "status": "pendente"
+    },
+    {
+      "tema": "Vitamina D e complexo B: quando a reposição é indicada (e por que exige avaliação)",
+      "status": "pendente"
+    },
+    {
+      "tema": "Terapia capilar: queda de cabelo, mesoterapia e laser",
+      "status": "pendente"
+    },
+    {
+      "tema": "Antes e depois: como olhar resultados com olhar crítico",
+      "status": "pendente"
+    },
+    {
+      "tema": "Consulta estética personalizada: o que acontece e como se preparar",
+      "status": "pendente"
+    }
+  ]
 }
